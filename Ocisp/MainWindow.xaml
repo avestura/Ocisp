@@ -13,7 +13,7 @@
     <ScrollViewer Margin="10">
         <StackPanel TextBlock.FontSize="20">
             <TextBlock FontSize="25">
-                Optimezed Crossover for independant set problem by&#160;<Hyperlink NavigateUri="https://github.com/0xaryan" RequestNavigate="Hyperlink_RequestNavigate">@0xaryan</Hyperlink>
+                Optimezed Crossover for independant set problem by&#160;<Hyperlink NavigateUri="https://github.com/avestura" RequestNavigate="Hyperlink_RequestNavigate">@avestura</Hyperlink>
             </TextBlock>
             <Border
                 Height="2"
