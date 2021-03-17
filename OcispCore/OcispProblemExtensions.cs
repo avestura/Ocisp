@@ -9,10 +9,8 @@ namespace OcispCore
 {
     public static class OcispProblemExtensions
     {
-
         public static DirectedBipartiteGraph ConstructDirectedAuxiliaryNetwork(this UndirectedBipartiteGraph undirectedGraph, int[] matchingMap)
         {
-
             var dbg = undirectedGraph.EmptyEdgeDirectedVersion();
 
             for(int i = 0; i < undirectedGraph.N1Size; i++)  // For each row of matrix
@@ -36,7 +34,6 @@ namespace OcispCore
             return dbg;
         }
 
-
         public static DirectedBipartiteGraph EmptyEdgeDirectedVersion(this UndirectedBipartiteGraph undirectedBipartiteGraph)
         {
             var dbg = new DirectedBipartiteGraph(undirectedBipartiteGraph.N1Size, undirectedBipartiteGraph.N2Size);
@@ -59,7 +56,7 @@ namespace OcispCore
             var indexes = Enumerable.Range(0, N1Size).ToList();
             for(int i = 0; i < matchingMap.Length; i++)
             {
-                indexes.Remove(matchingMap[i]);   
+                indexes.Remove(matchingMap[i]);
             }
 
             return indexes.ToArray();
@@ -105,9 +102,6 @@ namespace OcispCore
             return result.ToArray();
         }
 
-        public static int Evaluate(this bool[] answer) => answer.Where(x => x == true).Count();
-
-
-
+        public static int Evaluate(this bool[] answer) => answer.Count(x => x);
     }
 }

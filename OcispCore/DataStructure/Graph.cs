@@ -15,8 +15,6 @@ namespace OcispCore.DataStructure
         void DeleteEdge(int source, int destination);
     }
 
-
-
     public abstract class Graph : IGrapher
     {
         public int NodesCount { get; }
@@ -25,7 +23,7 @@ namespace OcispCore.DataStructure
 
         public int[] NodeNumbers { get; set; }
 
-        public Graph(int count, bool useSequentialNumbering = false)
+        protected Graph(int count, bool useSequentialNumbering = false)
         {
             NodesCount = count;
             _edges = new bool[count, count];
@@ -38,34 +36,23 @@ namespace OcispCore.DataStructure
                     NodeNumbers[i] = i;
                 }
             }
-
-
         }
 
         public bool[,] EdgeMatrix => _edges;
 
-        public bool HasEdge(int source, int destination)
-        {
-            return _edges[source, destination];
-        }
+        public bool HasEdge(int source, int destination) => _edges[source, destination];
 
         public abstract void ModifyEdge(int source, int destination, bool value);
 
-        public void CreateEdge(int source, int destination)
-        {
-            ModifyEdge(source, destination, true);
-        }
+        public void CreateEdge(int source, int destination) => ModifyEdge(source, destination, true);
 
-        public void DeleteEdge(int source, int destination)
-        {
-            ModifyEdge(source, destination, false);
-        }
+        public void DeleteEdge(int source, int destination) => ModifyEdge(source, destination, false);
     }
 
     public class UndirectedGraph : Graph
     {
-
         public UndirectedGraph(int count, bool useSequentialNumbering = false) : base(count, useSequentialNumbering) { }
+
         public override void ModifyEdge(int source, int destination, bool value)
         {
             _edges[source, destination] = value;
@@ -107,8 +94,8 @@ namespace OcispCore.DataStructure
 
     public class DirectedGraph : Graph
     {
-
         public DirectedGraph(int count, bool useSequentialNumbering = false) : base(count, useSequentialNumbering) { }
+
         public override void ModifyEdge(int source, int destination, bool value)
         {
             _edges[source, destination] = value;
@@ -149,11 +136,8 @@ namespace OcispCore.DataStructure
 
     public class UndirectedBipartiteGraph
     {
-
-
         public UndirectedBipartiteGraph(int N1Size, int N2Size)
         {
-
             _edges = new bool[N1Size, N2Size];
 
             N1NodeNumbers = new int[N1Size];
@@ -161,7 +145,6 @@ namespace OcispCore.DataStructure
 
             this.N1Size = N1Size;
             this.N2Size = N2Size;
-
         }
 
         public int NodesCount { get; }
@@ -170,20 +153,11 @@ namespace OcispCore.DataStructure
 
         public bool[,] EdgeMatrix => _edges;
 
-        public bool HasEdge(int source, int destination)
-        {
-            return _edges[source, destination];
-        }
+        public bool HasEdge(int source, int destination) => _edges[source, destination];
 
-        public void CreateEdge(int source, int destination)
-        {
-            ModifyEdge(source, destination, true);
-        }
+        public void CreateEdge(int source, int destination) => ModifyEdge(source, destination, true);
 
-        public void DeleteEdge(int source, int destination)
-        {
-            ModifyEdge(source, destination, false);
-        }
+        public void DeleteEdge(int source, int destination) => ModifyEdge(source, destination, false);
 
         public void ModifyEdge(int source, int destination, bool value)
         {
@@ -191,8 +165,8 @@ namespace OcispCore.DataStructure
         }
 
         public int[] N1NodeNumbers { get; set; }
-        public int[] N2NodeNumbers { get; set; }
 
+        public int[] N2NodeNumbers { get; set; }
 
         public int N1Size { get; private set;  }
         public int N2Size { get; private set;  }
@@ -208,10 +182,8 @@ namespace OcispCore.DataStructure
         public int[] N1NodeNumbers { get; set; }
         public int[] N2NodeNumbers { get; set; }
 
-
         public bool[] N1DFSIsVisited { get; }
         public bool[] N2DFSIsVisited { get; }
-
 
         public DirectedBipartiteGraph(int N1Size, int N2Size)
         {
@@ -226,21 +198,14 @@ namespace OcispCore.DataStructure
 
             N1DFSIsVisited = new bool[N1Size];
             N2DFSIsVisited = new bool[N2Size];
-
-
         }
 
         public bool[,] IncomingEdgeToN1Matrix => _inEdges;
         public bool[,] OutgoingEdgeFromN1Matrix => _outEdges;
 
-        public bool HasIncomingEdge(int N1Item, int N2Item)
-        {
-            return _inEdges[N1Item, N2Item];
-        }
-        public bool HasOutgoingEdge(int N1Item, int N2Item)
-        {
-            return _outEdges[N1Item, N2Item];
-        }
+        public bool HasIncomingEdge(int N1Item, int N2Item) => _inEdges[N1Item, N2Item];
+
+        public bool HasOutgoingEdge(int N1Item, int N2Item) => _outEdges[N1Item, N2Item];
 
         public void ModifyIncomingEdge(int N1Item, int N2Item, bool value)
         {
@@ -251,30 +216,17 @@ namespace OcispCore.DataStructure
             _outEdges[N1Item, N2Item] = value;
         }
 
-        public void CreateIncomingEdgeToN1(int N1Item, int N2Item)
-        {
-            ModifyIncomingEdge(N1Item, N2Item, true);
-        }
-        public void CreateOutgoingEdgeFromN1(int N1Item, int N2Item)
-        {
-            ModifyOutgoingEdge(N1Item, N2Item, true);
-        }
+        public void CreateIncomingEdgeToN1(int N1Item, int N2Item) => ModifyIncomingEdge(N1Item, N2Item, true);
+        public void CreateOutgoingEdgeFromN1(int N1Item, int N2Item) => ModifyOutgoingEdge(N1Item, N2Item, true);
 
-        public void DeleteIncomingEdgeToN1(int N1Item, int N2Item)
-        {
-            ModifyIncomingEdge(N1Item, N2Item, false);
-        }
-        public void DeleteOutgoingEdgeFromN1(int N1Item, int N2Item)
-        {
-            ModifyOutgoingEdge(N1Item, N2Item, false);
-        }
+        public void DeleteIncomingEdgeToN1(int N1Item, int N2Item) => ModifyIncomingEdge(N1Item, N2Item, false);
+        public void DeleteOutgoingEdgeFromN1(int N1Item, int N2Item) => ModifyOutgoingEdge(N1Item, N2Item, false);
 
         /**
          * Calculates L1 U L2 - L2
          **/
         public int[] DesiredOChildSet(int[] map)
         {
-
             var unmatchedIndexes = OcispProblemExtensions.UnmatchedIndexes(N1Size, map);
             for (int i = 0; i < unmatchedIndexes.Length; i++)
             {
@@ -309,7 +261,6 @@ namespace OcispCore.DataStructure
             }
 
             return OchildSelectedNumbers.ToArray();
-
         }
 
         private void DFS(int startingVerticeNumber)
@@ -372,11 +323,7 @@ namespace OcispCore.DataStructure
             return result.ToArray();
         }
 
-
         public int N1Size { get; private set; }
         public int N2Size { get; private set; }
     }
-
-
-
 }

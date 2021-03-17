@@ -12,9 +12,6 @@ namespace Ocisp
 {
     public static class Animation
     {
-
-  
-
         public static void MarginFadeInAnimation(this FrameworkElement element, Thickness from, Thickness to, TimeSpan? duration = null, bool useFade = true, bool makeVisible = true)
         {
             if (duration == null) duration = new TimeSpan(0, 0, 1);
@@ -55,7 +52,6 @@ namespace Ocisp
                 element.Visibility = Visibility.Visible;
             }
             element.BeginStoryboard(storyboard);
-
         }
 
         public static void MarginFadeOutAnimation(this FrameworkElement element, Thickness from, Thickness to, TimeSpan? duration = null, bool useFade = true, bool collapse = true)
@@ -97,7 +93,6 @@ namespace Ocisp
             }
 
             element.BeginStoryboard(storyboard);
-
         }
 
         #region Animation :: Show And Fade
@@ -118,9 +113,6 @@ namespace Ocisp
             element.Opacity = 1;
             element.Visibility = Visibility.Visible;
             element.BeginAnimation(UIElement.OpacityProperty, anim);
-
-
-
         }
 
         public static void ShowUsingLinearAnimation(this UIElement element, int milliSeconds = 500)
@@ -136,7 +128,6 @@ namespace Ocisp
             element.Opacity = 0;
             element.Visibility = Visibility.Visible;
             element.BeginAnimation(UIElement.OpacityProperty, anim);
-
         }
 
         public static Task HideUsingLinearAnimationAsync(this UIElement element, int milliSeconds = 500)
@@ -197,8 +188,5 @@ namespace Ocisp
             element.BlinkEasing(TimeSpan.FromMilliseconds(milliSecondDuration), opacityStart, opacityEnd);
         }
         #endregion
-
-
-
     }
 }

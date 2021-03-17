@@ -1,15 +1,9 @@
 ﻿using OcispCore.DataStructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OcispCore.Matching
 {
     public static class MatchFinder
     {
-
         // A DFS based recursive function that returns true if a
         // matching for vertex u is possible
         private static bool IsMatchingPossibleForVertex(UndirectedBipartiteGraph bipartiteGraph, int u, bool[] seen, int[] assignedItems)
@@ -34,7 +28,7 @@ namespace OcispCore.Matching
                     // Since v is marked as visitx ed in the above line,
                     // assignedItems[v] in the following recursive call will
                     // not get N2 item 'v' again
-                    if (assignedItems[v] < 0 || 
+                    if (assignedItems[v] < 0 ||
                         IsMatchingPossibleForVertex(bipartiteGraph, assignedItems[v], seen, assignedItems))
                     {
                         assignedItems[v] = u;
@@ -74,9 +68,5 @@ namespace OcispCore.Matching
             }
             return assignedItems;
         }
-
-
-
-
     }
 }

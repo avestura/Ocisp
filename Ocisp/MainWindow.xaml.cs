@@ -33,11 +33,8 @@ namespace Ocisp
 
         public OcispProblem Problem { get; set; }
 
-        
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
- 
 
         }
 
@@ -68,12 +65,7 @@ namespace Ocisp
                 ProcessGA();
 
                 ShowResults();
-
-
             }
-
-
-
         }
 
         public void ShowResults()

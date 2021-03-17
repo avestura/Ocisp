@@ -40,9 +40,7 @@ namespace OcispCore
             {
                 return false;
             }
-
         }
-
 
         #region Main Functionality
         public  void CreateInitialPopulation(int populationCount)
@@ -76,7 +74,7 @@ namespace OcispCore
 
                 var I2 = I2bool.NumbersEncoding();
                 var I1 = I1bool.NumbersEncoding();
-                // Now we should create a new Undirected Bipartite Graph 
+                // Now we should create a new Undirected Bipartite Graph
                 // N1 = I1
                 // N2 = I2 - I1
 
@@ -131,8 +129,6 @@ namespace OcispCore
                 {
                     newChildren.Add(EChildBool);
                 }
-                
-
             }
 
             // Elitism
@@ -175,7 +171,6 @@ namespace OcispCore
                 }
 
                 CurrentGeneration[i] = encode;
-
             }
         }
 
@@ -186,7 +181,6 @@ namespace OcispCore
 
             while (!TerminationCondition)
             {
-
                 Selection();
                 Crossover();
                 Mutate();
@@ -228,11 +222,10 @@ namespace OcispCore
 
         public UndirectedGraph CreateRandomParent()
         {
-
             var shuffleNodes = Enumerable.Range(0, ProblemGraph.NodesCount).ToArray();
-            
+
             shuffleNodes = shuffleNodes.ToList().OrderBy(x => Guid.NewGuid()).ToArray();
-            
+
             var selectedIndexes = new List<int>();
 
             for (int i = 0; i < shuffleNodes.Count(); i++)
@@ -243,7 +236,6 @@ namespace OcispCore
             }
 
             return UndirectedGraph.BuildSmallerGraph(ProblemGraph, selectedIndexes.ToArray());
-            
         }
 
         #region Helper Static Methods
@@ -298,12 +290,8 @@ namespace OcispCore
                 {
                     var x = int.Parse(line.Substring(2).Split(' ')[0]);
                     var y = int.Parse(line.Substring(2).Split(' ')[1]);
-                    if (graph != null)
-                    {
-                        graph.DeleteEdge(x - 1, y - 1);
-                    }
+                    graph?.DeleteEdge(x - 1, y - 1);
                 }
-
             }
             result.Graph = graph;
             return result;
@@ -316,7 +304,7 @@ namespace OcispCore
             for(int i = 0; i < p1.Length; i++)
             {
                 // E[i] = P1[i] + P2[i] + O[i]
-                // Karno Table
+                // Karnaugh map
                 //
                 //        [P2 O]
                 //     00  01  11  10
@@ -324,7 +312,7 @@ namespace OcispCore
                 // 0 | 0   0   0   1 |
                 // 1 | 1   0   1   1 |
                 //    ----------------
-                // 
+                //
                 result[i] = (p1[i] && o[i]) || (p1[i] && p2[i]) || (p2[i] && !o[i]);
 
                 if(result[i] == true)
@@ -338,18 +326,10 @@ namespace OcispCore
                         }
                     }
                 }
-
             }
 
             return result;
         }
-
-
-
-     
-
-
         #endregion Helper Static Methods
-
     }
 }
